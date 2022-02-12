@@ -1,15 +1,12 @@
 import requests
-from Config import Config
 
 class StartupUtil:
 
-    def __init__(self): pass
-
-    # Determine if the provided API key in the config is valid.
-    # @return bool
+    def __init__(self, key: str):
+        self.key = key
 
     def isApiKeyValid(self) -> bool:
-        result = requests.get("https://app.ponjo.club/v1/covid", headers={"Authorization": Config().get("API-KEY")})
+        result = requests.get("https://app.ponjo.club/v1/covid", headers={"Authorization": self.key})
         if result.status_code == 403:
             return False
         return True

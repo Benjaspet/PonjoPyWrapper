@@ -1,0 +1,2 @@
+class InvalidRequestParameterException(Exception):
+    pass
