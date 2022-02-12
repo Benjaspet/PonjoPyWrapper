@@ -7,5 +7,5 @@ A wrapper for the Ponjo API written in Python.
 - Run `Init.py` to initialize the PonjoPyWrapper.
 
 ```shell
-python3 Init.py
+python3 Examples.py
 ```

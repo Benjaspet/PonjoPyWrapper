@@ -1,6 +1,6 @@
 import requests
 from requests import HTTPError
-import src.Constants as Constants
+from src.Main import Main
 
 class ElixirEndpoint:
 
@@ -13,7 +13,7 @@ class ElixirEndpoint:
         @return: JSON response
         @rtype: object
         """
-        headers = {"Authorization": Constants.API_KEY}
+        headers = {"Authorization": Main().key}
         result = requests.get(f'https://app.ponjo.club/v1/elixir/nowplaying?guild={guild}', headers=headers)
         try:
             result.raise_for_status()

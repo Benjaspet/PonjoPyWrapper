@@ -1,5 +1,5 @@
 import requests
-from src.Config import Config
+from Config import Config
 
 class StartupUtil:
 
