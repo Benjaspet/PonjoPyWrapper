@@ -16,23 +16,32 @@ All portions of this software are available for public use, provided that
 credit is given to the original author(s).
 """
 
-from src.endpoints.ElixirEndpoint import ElixirEndpoint
-from src.endpoints.SCPEndpoint import SCPEndpoint
-from src.endpoints.RoboEerieEndpoint import RoboEerieEndpoint
+from requests import HTTPError
+from src.http.RequestFactory import RequestFactory
 
-class EndpointManager:
+class RoboEerieEndpoint:
 
-    def __init__(self, key: str):
+    def __init__(self, key: str, uri: str):
         self.key = key
-        self.elixirEndpoint = ElixirEndpoint(self.key)
-        self.scpEndpoint = SCPEndpoint(self.key, "https://app.ponjo.club/v1/scp")
-        self.roboEerieEndpoint = RoboEerieEndpoint(self.key, "https://app.ponjo.club/v1/roboeerie/tags")
+        self.uri = uri
 
-    def getElixirEndpoint(self) -> ElixirEndpoint:
-        return self.elixirEndpoint
+    def getRoboEerieTags(self, count: int = 5) -> object:
 
-    def getRoboEerieEndpoint(self) -> RoboEerieEndpoint:
-        return self.roboEerieEndpoint
+        """
+        @param count: The amount of tags to fetch.
+        @type count: int
+        @return: JSON response
+        @rtype: object
+        """
 
-    def getApiKey(self) -> str:
-        return self.key
+        response = RequestFactory(self.key)\
+            .setURL(f'{self.uri}?count={count}')\
+            .setHeaders({"Authorization": self.key})\
+            .setMethod("GET")\
+            .build()
+
+        try:
+            response.raise_for_status()
+            return response.json()
+        except HTTPError:
+            return response.json()
