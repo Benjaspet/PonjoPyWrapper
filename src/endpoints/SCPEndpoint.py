@@ -16,7 +16,7 @@ All portions of this software are available for public use, provided that
 credit is given to the original author(s).
 """
 
-from requests import HTTPError
+from requests import HTTPError, Response
 from src.http.RequestFactory import RequestFactory
 
 class SCPEndpoint:
@@ -34,7 +34,7 @@ class SCPEndpoint:
         @rtype: object
         """
 
-        response = RequestFactory(self.key)\
+        response: Response = RequestFactory(self.key)\
             .setURL(f'{self.uri}?item=${scp}')\
             .setHeaders({"Authorization": self.key})\
             .setMethod("GET")\

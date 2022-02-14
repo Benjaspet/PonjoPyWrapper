@@ -16,6 +16,7 @@ All portions of this software are available for public use, provided that
 credit is given to the original author(s).
 """
 
+from requests import Response
 from src.http.RequestFactory import RequestFactory
 
 class StartupUtil:
@@ -24,7 +25,7 @@ class StartupUtil:
         self.key = key
 
     def isApiKeyValid(self) -> bool:
-        response = RequestFactory(self.key)\
+        response: Response = RequestFactory(self.key)\
             .setMethod("GET")\
             .setURL("https://app.ponjo.club/v1/covid")\
             .setHeaders({"Authorization": self.key})\

@@ -18,3 +18,18 @@ credit is given to the original author(s).
 
 class InvalidRequestParameterException(Exception):
     pass
+
+class ResourceNotFoundException(Exception):
+    pass
+
+class ForbiddenException(Exception):
+    pass
+
+class RateLimitExceededException(Exception):
+    pass
+
+class InternalServerErrorException(Exception):
+    pass
+
+class TimeoutException(Exception):
+    pass
