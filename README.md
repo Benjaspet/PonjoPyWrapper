@@ -6,6 +6,9 @@ A wrapper for the Ponjo API written in Python.
 
 #### Initializing the Wrapper
 
+Before using the wrapper, you'll need to obtain an API key for the Ponjo API.
+You can view more information about the API [on its website](https://app.ponjo.club).
+
 First, you'll have to initialize the wrapper in order to use it:
 
 ```python
