@@ -45,3 +45,41 @@ class SCPEndpoint:
             return response.json()
         except HTTPError:
             return response.json()
+
+    def getTaskForces(self) -> object:
+
+        """
+        @return: JSON response
+        @rtype: object
+        """
+
+        response: Response = RequestFactory(self.key)\
+            .setURL(f'{self.uri}/taskforces')\
+            .setHeaders({"Authorization": self.key}) \
+            .setMethod("GET") \
+            .build()
+
+        try:
+            response.raise_for_status()
+            return response.json()
+        except HTTPError:
+            return response.json()
+
+    def getSCPBranches(self) -> object:
+
+        """
+        @return: JSON response
+        @rtype: object
+        """
+
+        response: Response = RequestFactory(self.key)\
+            .setURL(f'{self.uri}/branches')\
+            .setHeaders({"Authorization": self.key}) \
+            .setMethod("GET") \
+            .build()
+
+        try:
+            response.raise_for_status()
+            return response.json()
+        except HTTPError:
+            return response.json()

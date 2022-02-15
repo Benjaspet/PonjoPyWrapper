@@ -34,5 +34,8 @@ class EndpointManager:
     def getRoboEerieEndpoint(self) -> RoboEerieEndpoint:
         return self.roboEerieEndpoint
 
+    def getSCPEndpoint(self) -> SCPEndpoint:
+        return self.scpEndpoint
+
     def getApiKey(self) -> str:
         return self.key
