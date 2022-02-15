@@ -21,11 +21,6 @@ from src.exceptions.WrapperExceptions import InvalidRequestParameterException
 
 class RequestFactory:
 
-    url = None
-    method = None
-    headers = None
-    timeout = None
-
     def __init__(self, key: str):
         self.key = key
 
@@ -51,7 +46,7 @@ class RequestFactory:
 
     @classmethod
     def build(cls) -> requests or Exception:
-        if not cls.url or not cls.method or not cls.headers:
+        if not cls.url or not cls.method or not cls.headers or not cls.timeout:
             raise InvalidRequestParameterException("Missing one of required methods: setURL(), setMethod(), setHeaders().")
         if cls.method == "GET":
             if not cls.timeout:

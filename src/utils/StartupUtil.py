@@ -29,6 +29,7 @@ class StartupUtil:
             .setMethod("GET")\
             .setURL("https://app.ponjo.club/v1/covid")\
             .setHeaders({"Authorization": self.key})\
+            .setTimeout(200)\
             .build()
         if response.status_code == 403:
             return False

@@ -42,5 +42,5 @@ class ElixirEndpoint:
         try:
             response.raise_for_status()
             return response.json()
-        except HTTPError:
+        except HTTPError as err:
             return response.json()
