@@ -20,7 +20,6 @@ import sys
 from src.utils.StartupUtil import StartupUtil
 from src.managers.EndpointManager import EndpointManager
 
-
 class PonjoPyWrapper:
 
     def __init__(self, key: str):

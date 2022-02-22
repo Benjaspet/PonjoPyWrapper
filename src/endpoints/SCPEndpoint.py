@@ -25,7 +25,7 @@ class SCPEndpoint:
         self.key = key
         self.uri = uri
 
-    def getSCPData(self, scp: str) -> object:
+    async def getSCPData(self, scp: str) -> object:
 
         """
         @param scp: The SCP number to fetch.
@@ -35,7 +35,7 @@ class SCPEndpoint:
         """
 
         response: Response = RequestFactory(self.key)\
-            .setURL(f'{self.uri}?item=${scp}')\
+            .setURL(f'{self.uri}?item={scp}')\
             .setHeaders({"Authorization": self.key})\
             .setMethod("GET")\
             .build()
@@ -46,7 +46,7 @@ class SCPEndpoint:
         except HTTPError:
             return response.json()
 
-    def getTaskForces(self) -> object:
+    async def getTaskForces(self) -> object:
 
         """
         @return: JSON response
@@ -65,7 +65,7 @@ class SCPEndpoint:
         except HTTPError:
             return response.json()
 
-    def getSCPBranches(self) -> object:
+    async def getSCPBranches(self) -> object:
 
         """
         @return: JSON response

@@ -24,7 +24,7 @@ class ElixirEndpoint:
     def __init__(self, key: str):
         self.key = key
 
-    def getNowPlayingTrack(self, guild: str) -> object:
+    async def getNowPlayingTrack(self, guild: str) -> object:
 
         """
         @param guild: The guild ID of the music queue.
@@ -35,6 +35,27 @@ class ElixirEndpoint:
 
         response: Response = RequestFactory(self.key)\
             .setURL(f'https://app.ponjo.club/v1/elixir/nowplaying?guild={guild}')\
+            .setHeaders({"Authorization": self.key})\
+            .setMethod("GET")\
+            .build()
+
+        try:
+            response.raise_for_status()
+            return response.json()
+        except HTTPError as err:
+            return response.json()
+
+    async def getCustomPlaylistById(self, playlistId: str) -> object:
+
+        """
+        @param playlistId: The ID of the custom playlist.
+        @type playlistId: str
+        @return: JSON response
+        @rtype: object
+        """
+
+        response: Response = RequestFactory(self.key)\
+            .setURL(f'https://app.ponjo.club/v1/elixir/playlist/fetch?id={playlistId}')\
             .setHeaders({"Authorization": self.key})\
             .setMethod("GET")\
             .build()

@@ -25,7 +25,7 @@ class RoboEerieEndpoint:
         self.key = key
         self.uri = uri
 
-    def getRoboEerieTags(self, count: int = 5) -> object:
+    async def getRoboEerieTags(self, count: int = 5) -> object:
 
         """
         @param count: The amount of tags to fetch.
