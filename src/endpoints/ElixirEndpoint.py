@@ -24,17 +24,17 @@ class ElixirEndpoint:
     def __init__(self, key: str):
         self.key = key
 
-    async def getNowPlayingTrack(self, guild: str) -> object:
+    async def getNowPlayingTrack(self, guild: str, bot: str) -> object:
 
         """
+        @param bot: The Elixir bot ID.
         @param guild: The guild ID of the music queue.
-        @type guild: str
         @return: JSON response
         @rtype: object
         """
 
         response: Response = RequestFactory(self.key)\
-            .setURL(f'https://app.ponjo.club/v1/elixir/nowplaying?guild={guild}')\
+            .setURL(f'https://app.ponjo.club/v1/elixir/nowplaying?guild={guild}&bot={bot}')\
             .setHeaders({"Authorization": self.key})\
             .setMethod("GET")\
             .build()
@@ -57,6 +57,27 @@ class ElixirEndpoint:
         response: Response = RequestFactory(self.key)\
             .setURL(f'https://app.ponjo.club/v1/elixir/playlist/fetch?id={playlistId}')\
             .setHeaders({"Authorization": self.key})\
+            .setMethod("GET")\
+            .build()
+
+        try:
+            response.raise_for_status()
+            return response.json()
+        except HTTPError as err:
+            return response.json()
+
+    async def getGuildMusicQueueById(self, guild: str, bot: str):
+
+        """
+        @param guild: The guild ID of the music guild.
+        @param bot: The Elixir bot ID.
+        @return: JSON response
+        @rtype: object
+        """
+
+        response: Response = RequestFactory(self.key)\
+            .setURL(f'https://app.ponjo.club/v1/elixir/queue?guild={guild}&bot={bot}')\
+            .setHeaders({"Authorizations": self.key})\
             .setMethod("GET")\
             .build()
 
